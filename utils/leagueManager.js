@@ -18,7 +18,7 @@ const _world_cup = {
   name: "World Cup",
   leagueID: 732,
   seasonID: 18017,
-  startDate: '2022-11-1',
+  startDate: '2022-11-19',
   endDate: '2022-12-31'
 }
 

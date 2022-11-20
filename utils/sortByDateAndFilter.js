@@ -1,23 +1,35 @@
+const e = require("express")
+
 function sortByDateAndFilter(matches, options) {
   const allDates = matches.map((match) => match.time.starting_at.date)
   const dates = new Set(allDates)
 
+  let today = new Date().toISOString().slice(0, 10)
+
   const matchesByDate = []
+
   dates.forEach((date) => {
-    if(options && options.filterDate === date) {
+    if(date === today) {
       if (options.filterOut === 'results') {
-        const filtered = matches.filter((match) => {
-          match.time.status === 'NS'
+        const filtered = []
+        matches.forEach((match) => {
+          if (match.time.starting_at.date === date && match.time.status !== 'FT') {
+            filtered.push(match)
+          }
         })
-        if (filtered.length) {
+        console.log(filtered.length)
+        if (filtered.length > 0) {
           matchesByDate.push(selectByDate(filtered, date))
         }
-      }
-      if (options.filterOut === 'fixtures') {
-        const filtered = matches.filter((match) => {
-          match.time.status !== 'NS'
+      } else if (options.filterOut === 'fixtures') {
+        const filtered = []
+        matches.forEach((match) => {
+          if (match.time.starting_at.date === date && match.time.status === 'FT') {
+            filtered.push(match)
+          }
         })
-        if (filtered.length) {
+        console.log(filtered.length)
+        if (filtered.length > 0) {
           matchesByDate.push(selectByDate(filtered, date))
         }
       }
