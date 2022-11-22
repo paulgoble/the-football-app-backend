@@ -10,25 +10,23 @@ function sortByDateAndFilter(matches, options) {
 
   dates.forEach((date) => {
     if(date === today) {
+      const filtered = []
+
       if (options.filterOut === 'results') {
-        const filtered = []
         matches.forEach((match) => {
           if (match.time.starting_at.date === date && match.time.status !== 'FT') {
             filtered.push(match)
           }
         })
-        console.log(filtered.length)
         if (filtered.length > 0) {
           matchesByDate.push(selectByDate(filtered, date))
         }
       } else if (options.filterOut === 'fixtures') {
-        const filtered = []
         matches.forEach((match) => {
           if (match.time.starting_at.date === date && match.time.status === 'FT') {
             filtered.push(match)
           }
         })
-        console.log(filtered.length)
         if (filtered.length > 0) {
           matchesByDate.push(selectByDate(filtered, date))
         }
