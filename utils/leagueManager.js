@@ -22,4 +22,12 @@ const _world_cup = {
   endDate: '2022-12-31'
 }
 
-module.exports = _world_cup
+const _premier_league = {
+  name: "Premier League",
+  leagueID: 8,
+  seasonID: 19734,
+  startDate: '2023-01-01',
+  endDate: '2023-05-30'
+}
+
+module.exports = _premier_league
